@@ -1,0 +1,107 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Clientes</h2>
+    <button class="btn btn-secondary" (click)="cerrarSesion()">Cerrar Sesión</button>
+  </div>
+
+  <!-- Botón para agregar nuevo cliente -->
+  <button class="btn btn-primary" (click)="abrirModalCrear()">Crear Nuevo Cliente</button>
+
+
+  <!-- Formulario de creación y edición de clientes -->
+  <div *ngIf="mostrarModal" class="card">
+    <div class="card-header">
+      <h4 class="card-title">{{ modalTitle }}</h4>
+    </div>
+    <div class="card-body">
+      <!-- Formulario -->
+      <form (ngSubmit)="guardarCliente()">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="clienteSeleccionado.nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="clienteSeleccionado.apellido" required>
+        </div>
+        <div class="form-group">
+          <label for="correo">Correo</label>
+          <input type="email" class="form-control" id="correo" name="correo" [(ngModel)]="clienteSeleccionado.correo" required>
+        </div>
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="clienteSeleccionado.telefono" required>
+        </div>
+        <div class="form-group">
+          <label for="direccion">Dirección</label>
+          <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="clienteSeleccionado.direccion">
+        </div>
+        <div class="form-group">
+          <label for="fechaNacimiento">Fecha de Nacimiento</label>
+          <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" [(ngModel)]="clienteSeleccionado.fechaNacimiento">
+        </div>
+        <button type="submit" class="btn btn-primary mr-2">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="mostrarModal = false">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Tabla de Clientes Activos -->
+  <h3>Clientes Activos</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>Dirección</th>
+        <th>Fecha de Nacimiento</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <td>{{ cliente.nombre }}</td>
+        <td>{{ cliente.apellido }}</td>
+        <td>{{ cliente.correo }}</td>
+        <td>{{ cliente.telefono }}</td>
+        <td>{{ cliente.direccion }}</td>
+        <td>{{ cliente.fechaNacimiento | date:'dd/MM/yyyy' }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary mr-2" (click)="abrirModalEditar(cliente)">Editar</button>
+          <button class="btn btn-sm btn-danger" (click)="eliminarCliente(cliente)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Tabla de Clientes Eliminados -->
+  <h3>Clientes Eliminados</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>Dirección</th>
+        <th>Fecha de Nacimiento</th>
+        <th>Fecha de Eliminación</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let eliminado of eliminados">
+        <td>{{ eliminado.nombre }}</td>
+        <td>{{ eliminado.apellido }}</td>
+        <td>{{ eliminado.correo }}</td>
+        <td>{{ eliminado.telefono }}</td>
+        <td>{{ eliminado.direccion }}</td>
+        <td>{{ eliminado.fechaNacimiento | date:'dd/MM/yyyy' }}</td>
+        <td>{{ eliminado.fechaEliminacion | date:'dd/MM/yyyy HH:mm' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</div>

@@ -1,0 +1,26 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header" style="text-align: center; font-weight: bold; font-size: 18px;">
+            Iniciar Sesión
+          </div>
+          <div class="card-body">
+            <!-- Formulario de inicio de sesión -->
+            <form (ngSubmit)="login()">
+              <div class="form-group">
+                <label for="usuario">Usuario</label>
+                <input type="text" class="form-control" [(ngModel)]="usuario" name="usuario" placeholder="Ingresa tu nobre de usuario" required>
+              </div>
+              <div class="form-group">
+                <label for="contraseña">Contraseña</label>
+                <input type="password" class="form-control" [(ngModel)]="password" name="descripcion" placeholder="Ingresa tu contraseña" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
